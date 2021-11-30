@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   return (
     <Container>
         <Topside>
-            <h1>Cafeteria</h1>
+            <h1>Coffee Mountain</h1>
             <BiCookie/>
         </Topside>
         {
@@ -21,8 +21,7 @@ const Navbar: React.FC = () => {
                 <IoMdSearch/>
             </Bottomside>
           )
-        }
-       
+        }       
     </Container>
   );
 }

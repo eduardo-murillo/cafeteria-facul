@@ -23,7 +23,7 @@ const Login: React.FC = () => {
       const data = await api.post('user/login', {email: email, password: password})
       const message = data.data.message
       
-      if(message === 'succeful' ){
+      if(message === 'successfull' ){
         ShowModal(1500, message)
       }else{
         ShowModal(1500, message)
@@ -49,8 +49,8 @@ const Login: React.FC = () => {
       <>
         <Logo/> 
         <Heading>
-            Bem vindo
-            <p>Seja muito bem vindo</p>
+            Seja muito bem vindo ao Coffee Mountain!
+            <p>Venha tomar um café conosco!</p>
         </Heading>
         <Button onClick={OpenFormLogin}>Fazer Login</Button>
         <Button  onClick={OpenFormRegister}>Cadastrar-se</Button>

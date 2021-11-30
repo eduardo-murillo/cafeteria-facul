@@ -4,16 +4,16 @@ import { useContext } from 'react';
 import { LoginContext } from '../context/LoginContext'
 
 import Login from '../components/Login';
-// import Profile from '../components/Profile';
+// import Profile from '../components/Profile';      
 
 export default function User() {
   const { userID } = useContext(LoginContext)
   
   return (
-    <>
+    <>      
       <Head>
-        <title>Cafeteria | Profile</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Coffee Mountain | Login</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <div className="page">

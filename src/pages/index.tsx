@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Cafeteria | Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Coffee Mountain | Início</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <div className="page">
