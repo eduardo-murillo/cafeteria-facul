@@ -20,7 +20,8 @@ html,body, #root{
 .page{
   display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
 
   padding: 120px 1.5rem;
   position: relative;

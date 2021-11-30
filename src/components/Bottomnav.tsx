@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link'
 
 import { Container, Item, ActiveBar } from '../styles/Bottomnav';
 import { BiShoppingBag, BiUserCircle, BiCookie } from 'react-icons/bi'
+interface BottomNavInterface {
+    active: string;
+    setActive: Dispatch<SetStateAction<string>>;
+}
 
-const Bottomnav: React.FC = () => {
-    const [ active, setActive ] = useState('home')
+const Bottomnav: React.FC<BottomNavInterface> = ({active, setActive}) => {
 
     return (
         <Container>
             <Link href="/login">
                 <Item
-                    className={active === 'login' && 'active'}
-                    onClick={() => setActive('login')}>
+                    className={active === 'User' && 'active'}
+                    onClick={() => setActive('User')}>
                     <BiUserCircle/>
                 </Item>
             </Link>
             <Link href="/">
                 <Item
-                    className={active === 'home' && 'active'}
-                    onClick={() => setActive('home')}>
+                    className={active === 'Home' && 'active'}
+                    onClick={() => setActive('Home')}>
                     <BiCookie/>
                 </Item>
             </Link> 
             <Link href="/basket">
                 <Item
-                    className={active === 'basket' && 'active'}
-                    onClick={() => setActive('basket')}>
+                    className={active === 'Basket' && 'active'}
+                    onClick={() => setActive('Basket')}>
                     <BiShoppingBag/>
                 </Item>
             </Link> 
             <ActiveBar className={
-                active === "login"? "left": "" + 
-                active === "home"? "middle": "" + 
-                active === "basket"? "right": ""
+                active === "User"? "left": "" + 
+                active === "Home"? "middle": "" + 
+                active === "Basket"? "right": ""
             }/>
         </Container>
     );

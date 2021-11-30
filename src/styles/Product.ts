@@ -3,16 +3,23 @@ import styled from 'styled-components'
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 1;
 
-    margin-bottom: 1rem;
-    max-width: 375px;
-    width: 100%;
+    margin: 2rem 1rem;
+    width: 20%;
+    max-width: 350px;
+    min-width: 300px;
 `;
 export const Image = styled.div`
     background: var(--c100);
     height: 12rem;
     width: 100%;
+    overflow: hidden;
+
+    >img {
+        max-height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
 
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -48,6 +55,7 @@ export const Content = styled.div`
         align-items: center;
 
         background: var(--c300);
+        cursor: pointer;
     }
 
     

@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { Container, Image, Content,  Price}  from '../styles/Product';
-
-const Product: React.FC = () => {
+interface ProductInterface {
+    src: string;
+    alt?: string;
+}
+const Product: React.FC<ProductInterface> = ({src, alt}) => {
   return (
       <Container>
           <Image>
-
+            <img src={src} alt={alt} />
           </Image>
           <Content>
               <div>

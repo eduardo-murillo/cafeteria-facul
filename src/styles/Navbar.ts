@@ -22,6 +22,7 @@ export const Topside = styled.div`
     > h1{
         font-family: 'Dancing Script', cursive;
         font-size: 1.5rem;
+        cursor: pointer;
     }
     > svg{
         width: 32px;
