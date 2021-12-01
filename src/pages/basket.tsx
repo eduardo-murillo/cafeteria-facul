@@ -22,7 +22,7 @@ export default function Basket() {
           <RightSide>
             <h1>Endereço de Entrega:</h1>
             <p>Rua: </p>            
-            <input placeholder="Insira aqui o endereço para entrega.." type="text" style={{width: "700px", height: "30px"}}/>                            
+            <input placeholder="Insira aqui o endereço para entrega.." type="text" style={{width: "250px", height: "30px"}}/>                            
             <RiArrowRightSLine/>
           </RightSide>
         </DeliveryPlace>
