@@ -20,11 +20,15 @@ html,body, #root{
 .page{
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   padding: 120px 1.5rem;
   position: relative;
+}
+.page--wrap {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 :root{

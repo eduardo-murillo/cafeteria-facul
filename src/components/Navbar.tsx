@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarInterface> = ({setActive}) => {
   return (
     <Container>
         <Topside>
-            <h1 onClick={() => {setActive('home'); router.push('/')}}>Coffee Mountain</h1>
+            <h1 onClick={() => {setActive('Home'); router.push('/')}}>Coffee Mountain</h1>
             <BiCookie/>
         </Topside>
         {
