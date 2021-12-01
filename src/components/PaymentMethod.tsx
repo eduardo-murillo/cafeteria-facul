@@ -31,7 +31,7 @@ const PaymentMethod = () => {
                 </Option>
                 <RiArrowDownSLine/>
             </SelectedOption>
-            <DropdownContainer className={open && 'opened'}>
+            <DropdownContainer className={open ? 'opened' : undefined}>
                 {options.map((item) =>
                     <Option  key={item}>
                         {item}
