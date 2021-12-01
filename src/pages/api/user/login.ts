@@ -2,13 +2,13 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
-import { mysql } from '../../../../database/db'
+import { mysql, excuteQuery } from '../../../../database/db'
 
 import cookie from 'cookie'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-    // const { email } = request.body;
-    // const { password } = request.body;
+    const { email } = request.body;
+    const { password } = request.body;
     try {
         await mysql.connect()
         let result = await mysql.query('SELECT * FROM usuario where idUsuario = 1');
@@ -17,37 +17,22 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         console.log('erro', e);
         
     }
-    
 
-    // const { GUID_TOKEN } = process.env
-
-    // if (request.method === 'POST') {
-    //     let sql = 'SELECT * FROM person WHERE email = ?'
-    //     const person = await db.get(sql, [email]);
+    if (request.method === 'POST') {
         
-    //     if(person === undefined){
-    //         response.json({message: 'wrong email'});
-    //     }else{
-    //         compare(password, person.password, function(errors, result) {
-    //             if(!errors && result){
-    //                 const claims = { id: person.id}
-    //                 const jwt = sign(claims, GUID_TOKEN, { expiresIn: '1hr' })
+        if(email === null || email === ""){
+            response.json({message: 'Informe um email!'});
+        }
 
-    //                 response.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
-    //                     httpOnly: true,
-    //                     secure: process.env.NODE_ENV !== 'development',
-    //                     sameSite: 'strict',
-    //                     maxAge: 3600,
-    //                     path: '/'
-    //                 }) )
-    //                 response.status(200).json({message: 'Welcome to the app!'});
-    //             }else{
-    //                 response.status(405).json({message: 'wrong password'});
-    //             }
-    //         });
-    //     }
-    // } else {
-    //     response.status(405).json({ message: 'We only support POST' })
-    // }
+        if(password === null || password === ""){
+            response.json({message: 'Informe uma senha!'});
+        } else if (password != "" && email != ""){
+            let query = 'SELECT * FROM usuario WHERE EmailUsuario = ?'
+            const person = await excuteQuery({query, values: [email]});                
+        }        
+
+    } else {
+        response.status(405).json({ message: 'We only support POST' })
+    }
     mysql.end()
 }

@@ -1,4 +1,3 @@
-// db.js
 const mysql = require("serverless-mysql")();
 import {env} from "./next.config.js";
 mysql.config({
@@ -10,8 +9,8 @@ mysql.config({
 });
 async function excuteQuery({query, values}) {
   try {
-    const results = await db.query(query, values);
-    await db.end();
+    const results = await mysql.query(query, values);
+    await mysql.end();
     return results;
   } catch (error) {
     return {error};
