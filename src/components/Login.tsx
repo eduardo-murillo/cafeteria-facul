@@ -62,8 +62,8 @@ const Login: React.FC = () => {
         <Container className={opened && 'opened'}>
           <Tabs selectedIndex={tabView}  onSelect={index => setTabView(index)}>
             <TabList>
-              <Tab>Login</Tab>/
-              <Tab>Register</Tab>
+              <Tab>Entrar</Tab>/
+              <Tab>Registrar-se</Tab>
               <CloseForm onClick={() => setOpen(false)}><GrFormClose/> </CloseForm>
             </TabList>
 
