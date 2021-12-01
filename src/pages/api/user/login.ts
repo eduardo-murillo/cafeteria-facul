@@ -19,7 +19,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     }
 
     if (request.method === 'POST') {
-        
         if(email === null || email === ""){
             response.json({message: 'Informe um email!'});
         }
@@ -28,9 +27,9 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             response.json({message: 'Informe uma senha!'});
         } else if (password != "" && email != ""){
             let query = 'SELECT * FROM usuario WHERE EmailUsuario = ?'
-            const person = await excuteQuery({query, values: [email]});                
-        }        
-
+            const person = await excuteQuery({query, values: [email, password]});                
+        }                          
+        
     } else {
         response.status(405).json({ message: 'We only support POST' })
     }

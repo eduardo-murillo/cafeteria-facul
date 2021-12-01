@@ -17,6 +17,7 @@ const Login: React.FC = () => {
     const [ name, setName ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
+    const [ cpf, setCpf ] = useState('')
     
     async function  HandleLogin(event: FormEvent){
       event.preventDefault()
@@ -32,7 +33,7 @@ const Login: React.FC = () => {
     }
     async function  HandleSignUp(event: FormEvent){
       event.preventDefault()
-      const data = await api.post('user/signup', {name: name, email: email, password: password})
+      const data = await api.post('user/signup', {name: name, email: email, password: password, cpf: cpf})
       
       if(data.data !== '' ){
         ShowModal(1500, data.data.message)
@@ -76,6 +77,7 @@ const Login: React.FC = () => {
               <Input state={setName} placeholder="Nome" />
               <Input state={setEmail} placeholder="Email" />
               <Input state={setPassword} placeholder="Senha" />
+              <Input state={setCpf} placeholder="CPF" />
 
               <ButtonForm onClick={HandleSignUp}>Registrar-se</ButtonForm>
             </TabPanel>

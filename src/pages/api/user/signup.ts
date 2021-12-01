@@ -1,25 +1,21 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { hash } from 'bcryptjs'
-import sqlite from 'sqlite'
+import { mysql, excuteQuery } from '../../../../database/db'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
     const { name } = request.body;
     const { email } = request.body;
     const { password } = request.body;
-
-    const db = await sqlite.open('./database/person.sqlite')
-
+    const { cpf } = request.body;
+    
     //To do -> validate email, same email, and password length
 
-    if (request.method === 'POST') {
-        hash(password, 10, async function(err, hash) {
-            const statement = await db.prepare('INSERT INTO person (name, email, password) values (?,?,?)');
-            const result = await statement.run(name, email, hash);
-            result.finalize();
-        });
-
-        response.json({message: "Welcome to the app!!!"})
+    if (request.method === 'POST') {        
+            await mysql.connect()
+            const signup = 'INSERT INTO Usuario (NomeUsuario, EmailUsuario, SenhaUsuario, CPF) values (?,?,?,?)';
+            const person = await excuteQuery({query: signup, values: [name, email, password, cpf]})                
+        response.json({message: "Seja bem vindo ao Coffee Mountain :)"})
     } else {
-        response.status(405).json({ message: 'We only support POST' })
+        response.status(405).json({ message: 'Ops, algo deu errado!' })
     }
 }
