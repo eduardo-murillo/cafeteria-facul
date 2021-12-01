@@ -10,6 +10,13 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     const { email, password } = request.body;
     
     if (request.method === 'POST') {
+        if(email === null || email === ""){
+            response.json({message: 'Informe um email!'});
+        }
+
+        if(password === null || password === ""){
+            response.json({message: 'Informe uma senha!'});
+        }
         try {
             let query = 'SELECT * FROM usuario WHERE EmailUsuario = ?'
             const person = (await excuteQuery({query, values: [email]}))[0];
@@ -43,4 +50,5 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     } else {
         response.status(405).json({ message: 'We only support POST' })
     }
+    mysql.end()
 }

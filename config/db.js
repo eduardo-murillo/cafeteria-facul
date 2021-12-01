@@ -1,4 +1,3 @@
-// db.js
 const mysql = require("serverless-mysql")();
 import {env} from "./next.config.js";
 mysql.config({
