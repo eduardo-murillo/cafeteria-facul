@@ -1,13 +1,12 @@
 // db.js
-import mysql from "serverless-mysql";
-const db = mysql({
-  config: {
-    host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_PORT,
-    database: process.env.MYSQL_DATABASE,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-  },
+const mysql = require("serverless-mysql")();
+import {env} from "./next.config.js";
+mysql.config({
+  host: env.MYSQL_HOST,
+  port: env.MYSQL_PORT,
+  database: env.MYSQL_DATABASE,
+  user: env.MYSQL_USER,
+  password: env.MYSQL_PASSWORD,
 });
 async function excuteQuery({query, values}) {
   try {
@@ -19,4 +18,4 @@ async function excuteQuery({query, values}) {
   }
 }
 
-export {db, excuteQuery};
+export {mysql, excuteQuery};

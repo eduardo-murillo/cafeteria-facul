@@ -2,16 +2,21 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
-import { db } from '../../../../database/db'
+import { mysql } from '../../../../database/db'
 
 import cookie from 'cookie'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
     // const { email } = request.body;
     // const { password } = request.body;
-    db.connect()
-    let result = await db.query('SELECT * FROM usuario where idUsuario = 1');
-    console.log('resultados', result);
+    try {
+        await mysql.connect()
+        let result = await mysql.query('SELECT * FROM usuario where idUsuario = 1');
+        console.log('resultados', result);
+    } catch (e) {
+        console.log('erro', e);
+        
+    }
     
 
     // const { GUID_TOKEN } = process.env
@@ -44,5 +49,5 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     // } else {
     //     response.status(405).json({ message: 'We only support POST' })
     // }
-    db.end()
+    mysql.end()
 }
