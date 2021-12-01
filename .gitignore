@@ -32,7 +32,7 @@ yarn-error.log*
 .env.production.local
 
 # localhost config
-/database/next.config.js
+/config/next.config.js
 
 # vercel
 .vercel

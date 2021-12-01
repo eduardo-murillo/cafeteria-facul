@@ -6,7 +6,7 @@ import { GrFormClose } from 'react-icons/gr'
 
 import { Tab, Tabs, TabList, TabPanel,  } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import api from '../../database/api'
+import api from '../../config/api'
 
 const Login: React.FC = () => {
     const [ opened, setOpen ] = useState(false) 
