@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { hash } from 'bcryptjs'
+
 import { mysql, excuteQuery } from '../../../../database/db'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
@@ -16,6 +17,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             const person = await excuteQuery({query: signup, values: [name, email, password, cpf]})                
         response.json({message: "Seja bem vindo ao Coffee Mountain :)"})
     } else {
-        response.status(405).json({ message: 'Ops, algo deu errado!' })
+        response.status(405).json({ message: 'Ops, algo deu errado :(' })
     }
 }
