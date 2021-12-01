@@ -10,23 +10,25 @@ export default function Basket() {
   return (
     <>
       <Head>
-        <title>Cafeteria | Cestinha</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Coffee Mountain | Carrinho</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <div  className="page">
+      <div className="page">
         <h1>Carrinho</h1>
 
         <DeliveryPlace>
           <LeftSide></LeftSide>
           <RightSide>
-            <h1>DeliveryPlace</h1>
-            <p>Rua tal de tal</p>
+            <h1>Endereço de Entrega:</h1>
+            <p>Rua: </p>            
+            <input placeholder="Insira aqui o endereço para entrega.." type="text" style={{width: "250px", height: "30px"}}/>                            
             <RiArrowRightSLine/>
           </RightSide>
         </DeliveryPlace>
-        
+
         <Items>
+        <h3>Revise seu pedido:</h3>
           <Item/>
           <Item/>
           <Item/>
@@ -38,7 +40,7 @@ export default function Basket() {
         <PaymentMethod/>
 
         <Button className="FinalButton">
-          Fazer Pedido
+          Finalizar Pedido
         </Button>
       </div> 
     </>

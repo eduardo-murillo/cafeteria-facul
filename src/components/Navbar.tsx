@@ -26,8 +26,7 @@ const Navbar: React.FC<NavbarInterface> = ({setActive}) => {
                 <IoMdSearch/>
             </Bottomside>
           )
-        }
-       
+        }       
     </Container>
   );
 }
