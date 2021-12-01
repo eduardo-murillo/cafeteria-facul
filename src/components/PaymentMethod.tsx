@@ -11,11 +11,11 @@ import {
 
 const PaymentMethod = () => {
     const options = [
-        'dinheiro', 'cartao de credito', 'pixx', 
+        'Dinheiro', 'Cartão de Crédito', 'Pix', 
     ];
 
     const [ open, setOpen ] = useState(false)
-    const [ active, setActive ] = useState('dinheiro')
+    const [ active, setActive ] = useState('Dinheiro')
 
     function SwitchMethod(active: string){
         setOpen(!open)
@@ -24,7 +24,7 @@ const PaymentMethod = () => {
 
     return (
         <Container>
-            <h1>Metodo de pagamento</h1>
+            <h1>Forma de pagamento</h1>
             <SelectedOption onClick={() => SwitchMethod(active)}>
                 <Option>
                     {active}

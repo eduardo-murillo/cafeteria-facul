@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Cafeteria | Home</title>
+        <title>Coffee Mountain | Início</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
 
