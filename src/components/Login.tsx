@@ -21,12 +21,10 @@ const Login: React.FC = () => {
     
     async function  HandleLogin(event: FormEvent){
       event.preventDefault()
-      const data = await api.post('user/login', {email: email, password: password})
+      const data = await api.get('user/login', {auth:{username: email, password}})
       const message = data.data.message
       
-      if(message === 'successfull' ){
-        ShowModal(1500, message)
-      }else{
+      if(message){
         ShowModal(1500, message)
       }
       setOpen(false)

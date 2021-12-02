@@ -13,10 +13,12 @@ const Product: React.FC<ProductInterface> = ({src, alt}) => {
           </Image>
           <Content>
               <div>
-                <p>
+                <span>
                     <h1>Brigadeiro</h1>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro aut ab .
-                </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro aut ab .
+                    </p>
+                </span>
                 <Price>
                     <h1>00,0</h1>
                     <h2>R$</h2>

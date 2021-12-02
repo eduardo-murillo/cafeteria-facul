@@ -36,7 +36,7 @@ export const Content = styled.div`
     padding: 1.25rem;
     background: var(--c200); 
 
-    >div{
+    > div{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -56,11 +56,6 @@ export const Content = styled.div`
 
         background: var(--c300);
         cursor: pointer;
-    }
-
-    
-    > p{
-
     }
 `;
 export const Price = styled.span`
