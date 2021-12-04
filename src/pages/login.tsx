@@ -4,10 +4,13 @@ import { useContext } from 'react';
 import { LoginContext } from '../context/LoginContext'
 
 import Login from '../components/Login';
+import Profile from '../components/Profile';
+import { useSelector } from 'react-redux';
 // import Profile from '../components/Profile';      
 
 export default function User() {
-  const { userID } = useContext(LoginContext)
+  const user = useSelector((state:any) => state.user?.id)
+
   
   return (
     <>      
@@ -17,7 +20,7 @@ export default function User() {
       </Head>
 
       <div className="page">
-          <Login/>
+        {user ? <Profile/> : <Login/>}
       </div> 
     </>
   )

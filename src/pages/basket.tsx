@@ -5,8 +5,30 @@ import { DeliveryPlace, LeftSide, RightSide, Items, Button }  from '../styles/Ba
 import Item from '../components/Item';
 import TotalPrice from '../components/TotalPrice';
 import PaymentMethod from '../components/PaymentMethod';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { fretesUpdate } from '../store/products';
+import api from '../../config/api';
+import router from 'next/router';
 
 export default function Basket() {
+  const dispatch = useDispatch()
+  const {basketItems, fretes} = useSelector((state:any) => state.products)
+  
+  const [valorTaxa, setValorTaxa] = useState(15)
+
+  async function getFretes() {
+    const {fretes} = (await api.get('basket/fretes')).data
+    dispatch(fretesUpdate(fretes))
+    console.log('fretes', fretes);
+  }
+
+  useEffect(() => {
+    if(fretes.length === 0 ) {
+      getFretes()
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -29,14 +51,14 @@ export default function Basket() {
 
         <Items>
         <h3>Revise seu pedido:</h3>
-          <Item/>
-          <Item/>
-          <Item/>
+        {basketItems.map(({id, name, price}) => {
+          return <Item id={id} name={name} price={price}/>
+        })}
 
-          <Button>Adicionar mais  Itens</Button>
+          <Button onClick={() => {router.push('/')}} style={{cursor: 'pointer'}}>Adicionar mais  Itens</Button>
         </Items>
 
-        <TotalPrice/>
+        <TotalPrice produtos={basketItems} frete={valorTaxa}/>
         <PaymentMethod/>
 
         <Button className="FinalButton">

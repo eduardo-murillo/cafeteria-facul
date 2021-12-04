@@ -30,6 +30,8 @@ export const Content = styled.div`
     align-items: center;
     flex-direction: column;
 
+    min-height: 249px;
+
     border-radius: 20px;
     margin-top: -30px;
 
@@ -44,7 +46,7 @@ export const Content = styled.div`
     }
 
     > button{
-        margin-top: 1rem;
+        margin-top: auto;
 
         width: 100%;
         padding: .75rem;

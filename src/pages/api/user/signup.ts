@@ -28,23 +28,20 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             await mysql.connect()
             const signup = 'INSERT INTO usuario (NomeUsuario, EmailUsuario, SenhaUsuario, CPF) values (?,?,?,?)';
             const hashedPassword = await hash(password, 10)
-
+            
             const insertedUser = await excuteQuery({query: signup, values: [name, email, hashedPassword, cpf]})   
+            const searchUser = 'Select * from usuario where idUsuario = ?';
+            const [user] = await excuteQuery({query: searchUser, values: [insertedUser.insertId]})   
+            
             await mysql.end()
 
             if(insertedUser.error) {
                 throw new Error
             }
 
-            const userToken = jwt.sign({user: insertedUser.insertId})
-            response.setHeader('Set-Cookie', cookie.serialize('auth', userToken, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== 'development',
-                sameSite: 'strict',
-                maxAge: 86400,
-                path: '/'
-            }) )
-            return response.status(200).json({message: "Seja bem vindo ao Coffee Mountain :)"})
+            const userToken = jwt.sign({user: user.idUsuario})
+
+            return response.status(200).json({message: "Seja bem vindo ao Coffee Mountain :)", user: {id: userToken, name: user.NomeUsuario}})
         } catch (e) {
             await mysql.end()
             return response.status(405).json({ message: 'Erro ao cadastrar usuário'})

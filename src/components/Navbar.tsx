@@ -6,17 +6,18 @@ import { Container, Topside, Bottomside } from '../styles/Navbar';
 import { BiCookie } from 'react-icons/bi'
 import { IoMdSearch } from 'react-icons/io'
 
-interface NavbarInterface {
-  setActive: Dispatch<SetStateAction<string>>;
-}
+// interface NavbarInterface {
+//   setActive: Dispatch<SetStateAction<string>>;
+// }
 
-const Navbar: React.FC<NavbarInterface> = ({setActive}) => {
+// const Navbar: React.FC<NavbarInterface> = ({setActive}) => {
+const Navbar: React.FC = () => {
   const router = useRouter()
 
   return (
     <Container>
         <Topside>
-            <h1 onClick={() => {setActive('Home'); router.push('/')}}>Coffee Mountain</h1>
+            <h1 onClick={() => router.push('/')}>Coffee Mountain</h1>
             <BiCookie/>
         </Topside>
         {

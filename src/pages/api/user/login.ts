@@ -44,15 +44,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
                 compare(password, person.SenhaUsuario, async function(errors, result) {
                     if(!errors && result){
                         const userToken = jwt.sign({user: person.id})
-
-                        response.setHeader('Set-Cookie', cookie.serialize('auth', userToken, {
-                            httpOnly: true,
-                            secure: process.env.NODE_ENV !== 'development',
-                            sameSite: 'strict',
-                            maxAge: 86400,
-                            path: '/'
-                        }) )
-                        return response.status(200).json({message: 'Seja bem vindo ao Coffee Mountain :)'});
+                        
+                        return response.status(200).json({message: 'Seja bem vindo ao Coffee Mountain :)', user: {id: userToken, name: person.NomeUsuario}});
                     }else{
                         await mysql.end()
                         return response.status(405).json({message: 'Usuário ou senha incorretas.'});

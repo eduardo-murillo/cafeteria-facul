@@ -7,8 +7,12 @@ import { GrFormClose } from 'react-icons/gr'
 import { Tab, Tabs, TabList, TabPanel,  } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import api from '../../config/api'
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../store/user';
 
 const Login: React.FC = () => {
+    const dispatch = useDispatch();
+
     const [ opened, setOpen ] = useState(false) 
     const [ tabView, setTabView ] = useState(0)
     const [ showModal, setShowModal ] = useState(false)
@@ -23,8 +27,11 @@ const Login: React.FC = () => {
       event.preventDefault()
       const data = await api.get('user/login', {auth:{username: email, password}})
       const message = data.data.message
+      const user = data.data.user
       
       if(message){
+        dispatch(userLogin(user))
+        localStorage.setItem('user', user)
         ShowModal(1500, message)
       }
       setOpen(false)
@@ -32,12 +39,16 @@ const Login: React.FC = () => {
     async function  HandleSignUp(event: FormEvent){
       event.preventDefault()
       const data = await api.post('user/signup', {name, email, password, cpf})
-      
+      const message = data.data.message
+      const user = data.data.user
+
       if(data.data !== '' ){
-        ShowModal(1500, data.data.message)
-        setTimeout(function() {
-          OpenFormLogin()
-        }, 2500);
+        dispatch(userLogin(user))
+        localStorage.setItem('user', user)
+        ShowModal(1500, message)
+        // setTimeout(function() {
+        //   OpenFormLogin()
+        // }, 2500);
       }else{
         ShowModal(1500, 'As informações estão incorretas')
       }
