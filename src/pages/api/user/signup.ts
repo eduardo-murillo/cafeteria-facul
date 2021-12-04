@@ -5,8 +5,8 @@ import { mysql, excuteQuery } from '../../../../config/db'
 import cookie from 'cookie'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-    if (request.method === 'POST') {        
-        const { name, email, password, cpf } = request.body;
+    if (request.method === 'POST') {                
+        const { name, email, password, cpf } = request.body;        
     
         if(!name){
             return response.json({message: 'Informe um nome!'});
@@ -22,12 +22,21 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
         if(!cpf){
             return response.json({message: 'Informe um cpf!'});
-        }
+        }    
+
+            const searchCpf = 'Select CPF from usuario where CPF = ?';
+            const [cpf1] = await excuteQuery({query: searchCpf, values: [cpf]})                             
+            const cpffinal = cpf1.CPF;            
+            
+            if(cpffinal === cpf){
+                return response.json({message: 'CPF já cadastrado!'});            
+            }
         
         try {
-            await mysql.connect()
+            await mysql.connect()            
+            
             const signup = 'INSERT INTO usuario (NomeUsuario, EmailUsuario, SenhaUsuario, CPF) values (?,?,?,?)';
-            const hashedPassword = await hash(password, 10)
+            const hashedPassword = await hash(password, 10)                        
             
             const insertedUser = await excuteQuery({query: signup, values: [name, email, hashedPassword, cpf]})   
             
