@@ -5,6 +5,7 @@ export const Logo = styled.div`
     height: 160px;
     background: var(--c300);
     border-radius: 100px;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/coffeemountain.appspot.com/o/logocoffee.png?alt=media&token=a8a0febc-46ff-4270-aa40-51c1159ab841");
 `
 export const Heading = styled.h1`
     margin-top: 2rem;
