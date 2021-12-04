@@ -43,7 +43,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             }else{
                 compare(password, person.SenhaUsuario, async function(errors, result) {
                     if(!errors && result){
-                        const userToken = jwt.sign({user: person.id})
+                        const userToken = jwt.sign({user: person.IdUsuario})
                         
                         return response.status(200).json({message: 'Seja bem vindo ao Coffee Mountain :)', user: {id: userToken, name: person.NomeUsuario}});
                     }else{
