@@ -19,7 +19,7 @@ export default function Home() {
 
       <div className="page page--wrap">
         {items.map((item) => (
-          <Product src="https://firebasestorage.googleapis.com/v0/b/tagorilla-db761.appspot.com/o/images%2F0c4dc23-06b-0a0c-3dd1-38a40fdc1a.jpg?alt=media&token=5328a7d6-1e7c-4f8d-bdb5-6018620d609b" alt={item.NomeProduto} name={item.NomeProduto} desc='Placeholder de descrição' price={item.PrecoProduto} item={item} addProduct={addBasketProduct}/>
+          <Product src={item.URLImg} alt={item.NomeProduto} name={item.NomeProduto} desc={item.DescricaoProduto} price={item.PrecoProduto} item={item} addProduct={addBasketProduct}/>
         ))}
       </div> 
     </>

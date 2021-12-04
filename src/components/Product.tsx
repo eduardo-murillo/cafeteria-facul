@@ -18,16 +18,16 @@ const Product: React.FC<ProductInterface> = ({src, alt, name, desc, price, addPr
           </Image>
           <Content>
               <div>
+                <h1>{name}</h1>
                 <span>
-                    <h1>{name}</h1>
                     <p>
                         {desc}
                     </p>
+                    <Price>
+                        <h1>{price.toFixed(2)}</h1>
+                        <h2>R$</h2>
+                    </Price>
                 </span>
-                <Price>
-                    <h1>{price.toFixed(2)}</h1>
-                    <h2>R$</h2>
-                </Price>
               </div>
               <button onClick={() => addProduct(item)}>
                   Adicionar

@@ -13,7 +13,11 @@ export  const LeftSide = styled.div`
 
     width: 65px;
     height: 65px;
-    background:  var(--c300);
+
+    > svg {
+        width: 100%;
+        height: 100%;
+    }
 `;
 export  const RightSide = styled.div`
     display: flex;

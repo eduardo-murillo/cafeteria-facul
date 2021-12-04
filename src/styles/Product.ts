@@ -41,8 +41,18 @@ export const Content = styled.div`
     > div{
         display: flex;
         justify-content: center;
-        align-items: center;
-        flex-direction: row;
+        align-items: flex-start;
+        flex-direction: column;
+        > h1 {
+            font-size: 20px;
+            height: 30px;
+            overflow: hidden;
+        }
+        > span {
+            display: flex;
+            height: 100px;
+            margin-top: 0.5rem;
+        }
     }
 
     > button{
@@ -65,12 +75,13 @@ export const Price = styled.span`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-left: 0.5rem;
     >h1{
         font-size: 2.25rem;
-        line-height: 2.5rem
+        line-height: 2.25rem;
     }
     >h2{
-        font-size: 4rem;
-        line-height: 1;
+        font-size: 3.25rem;
+        line-height: 2.5rem;
     }
 `;

@@ -67,7 +67,14 @@ export const OptionContainer = styled.div`
 export const LeftSide = styled.div`
     width: 52px;
     height: 52px;
-    background: var(--c300);
+    &:hover {
+        background: var(--c300);
+    }
+
+    > svg {
+        width: 100%;
+        height: 100%;
+    }
 `
 export const RightSide = styled.div`
     display: flex;

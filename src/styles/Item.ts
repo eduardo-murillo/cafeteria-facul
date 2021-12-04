@@ -12,7 +12,7 @@ export const Container = styled.div`
   margin-bottom: 0.5rem;
 
   &:hover{
-    filter: brightness(50%);
+    filter: brightness(90%);
     > span{
         display: flex;
     }
@@ -50,5 +50,16 @@ export const RightSide = styled.div`
     width:  52px;
     height: 52px;
 
-    background: var(--c300);
+    &:hover {
+      background-color: var(--c300);
+      border-radius: 50%;
+    }
+
+    > svg {
+      width: 100%;
+      height: 100%;
+      &:hover {
+        cursor: pointer;
+      }
+    }
 `;

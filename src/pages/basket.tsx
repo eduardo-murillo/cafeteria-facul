@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { fretesUpdate } from '../store/products';
 import api from '../../config/api';
 import router from 'next/router';
+import { GrFormLocation } from 'react-icons/gr';
 
 export default function Basket() {
   const dispatch = useDispatch()
@@ -40,12 +41,14 @@ export default function Basket() {
         <h1>Carrinho</h1>
 
         <DeliveryPlace>
-          <LeftSide></LeftSide>
+          <LeftSide>
+            <GrFormLocation/>
+          </LeftSide>
           <RightSide>
             <h1>Endereço de Entrega:</h1>
             <p>Rua: </p>            
             <input placeholder="Insira aqui o endereço para entrega.." type="text" style={{width: "250px", height: "30px"}}/>                            
-            <RiArrowRightSLine/>
+            {/* <RiArrowRightSLine/> */}
           </RightSide>
         </DeliveryPlace>
 

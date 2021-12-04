@@ -24,14 +24,13 @@ const Item: React.FC<ItemInterface> = ({id, name, price}) => {
 
   return (
     <Container>
-      <span>
-        <GrFormClose onClick={() => removeProduct(id)}/>
-      </span>
       <LeftSide>
         <h1>{name}</h1>
         <p>R${price.toFixed(2)}</p>
       </LeftSide>
-      <RightSide></RightSide>
+      <RightSide>
+          <GrFormClose onClick={() => removeProduct(id)}/>
+      </RightSide>
     </Container>
   );
 }
