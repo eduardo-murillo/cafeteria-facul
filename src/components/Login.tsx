@@ -78,14 +78,14 @@ const Login: React.FC = () => {
 
             <TabPanel>
               <Input state={setEmail} placeholder="Email" />
-              <Input state={setPassword} placeholder="Senha" />
+              <Input state={setPassword} type="password" placeholder="Senha" />
 
               <ButtonForm onClick={HandleLogin}>Entrar</ButtonForm>
             </TabPanel>
             <TabPanel>
               <Input state={setName} placeholder="Nome" />
               <Input state={setEmail} placeholder="Email" />
-              <Input state={setPassword} placeholder="Senha" />
+              <Input state={setPassword} type="password" placeholder="Senha" />              
               <Input state={setCpf} placeholder="CPF" />
 
               <ButtonForm onClick={HandleSignUp}>Registrar-se</ButtonForm>
