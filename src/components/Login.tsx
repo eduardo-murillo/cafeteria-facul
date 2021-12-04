@@ -26,12 +26,16 @@ const Login: React.FC = () => {
     async function  HandleLogin(event: FormEvent){
       event.preventDefault()
       const data = await api.get('user/login', {auth:{username: email, password}})
+      console.log(data.data);
+      
       const message = data.data.message
       const user = data.data.user
       
       if(message){
         dispatch(userLogin(user))
-        localStorage.setItem('user', JSON.stringify(user))
+        if(user) {
+          localStorage.setItem('user', JSON.stringify(user))
+        }
         ShowModal(1500, message)
       }
       setOpen(false)
