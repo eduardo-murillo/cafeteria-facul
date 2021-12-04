@@ -42,7 +42,7 @@ export default function Basket() {
 
         <DeliveryPlace>
           <LeftSide>
-            <img src="https://firebasestorage.googleapis.com/v0/b/coffeemountain.appspot.com/o/deliveryico.png?alt=media&token=e4e8589c-414f-4035-9baf-012f2bc50c36"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/coffeemountain.appspot.com/o/deliveryico.png?alt=media&token=967536a0-d04e-4d1e-8f55-07712a99fdba"/>
           </LeftSide>
           <RightSide>
             <h1>Endereço de Entrega:</h1>

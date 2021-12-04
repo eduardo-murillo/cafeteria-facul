@@ -7,8 +7,8 @@ export default function Home() {
   const dispatch = useDispatch()
   const {items, basketItems} = useSelector((state:any)=> state.products)
 
-  function addBasketProduct({idProduto, NomeProduto, PrecoProduto}) {
-    dispatch(basketProductsUpdate([...basketItems, {id: idProduto, name: NomeProduto, price: PrecoProduto}]))
+  function addBasketProduct({IdProduto, NomeProduto, PrecoProduto}) {
+    dispatch(basketProductsUpdate([...basketItems, {id: IdProduto, name: NomeProduto, price: PrecoProduto}]))
   }
   return (
     <>

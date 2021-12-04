@@ -62,6 +62,8 @@ const Profile: React.FC = () => {
         <Heading>
             Olá, {user.name}
         </Heading>
+        <Button >Editar Usuário</Button>
+        <Button >Meus Pedidos</Button>
         <Button onClick={logout}>Sair</Button>
     </>
   );

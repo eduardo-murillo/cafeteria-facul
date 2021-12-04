@@ -24,8 +24,8 @@ const Product: React.FC<ProductInterface> = ({src, alt, name, desc, price, addPr
                         {desc}
                     </p>
                     <Price>
-                        <h1>{price.toFixed(2)}</h1>
                         <h2>R$</h2>
+                        <h1>{price.toFixed(2)}</h1>
                     </Price>
                 </span>
               </div>
