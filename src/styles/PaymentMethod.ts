@@ -19,6 +19,7 @@ export const SelectedOption = styled.div`
     display: flex; 
     width: 100%;
     position: relative;
+    cursor: pointer;
 
     border-bottom: 3px solid var(--c300);
     margin-bottom: .5rem;
@@ -40,6 +41,7 @@ export const DropdownContainer = styled.div`
     height: 0%;
     overflow: hidden;
     transition: 400ms;
+    cursor: pointer;
 
     position: absolute;
     top: 100%;

@@ -24,6 +24,7 @@ export const Button = styled.div`
     background: var(--c300);
     width: 15rem;
     height: 3rem;
+    cursor: pointer;
 
     margin-top: 1rem;
     border-radius: 99px;
@@ -92,6 +93,7 @@ export const CloseForm = styled.span`
   right: 10%;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 
   > svg{
     width: 25px;
@@ -107,6 +109,7 @@ export const ButtonForm = styled.button`
   padding: .5rem 3rem;
   border-radius: 999px;
   margin-top: 1rem;
+  cursor: pointer;
 
   background: var(--yellow);
   filter: brightness(95%);

@@ -34,6 +34,7 @@ export const Bottomside = styled.div`
     align-items: center;
     position: relative;
     margin-top: 1rem;
+    cursor: pointer;
 
     > input{
         padding: 5px 10px;

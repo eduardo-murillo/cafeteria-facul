@@ -20,6 +20,7 @@ export const Item = styled.section`
     justify-content: center;
     align-items: center;
     flex: 1;
+    cursor: pointer;
     
     &.active{
         color: var(--yellow);
