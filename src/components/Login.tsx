@@ -6,9 +6,13 @@ import { GrFormClose } from 'react-icons/gr'
 
 import { Tab, Tabs, TabList, TabPanel,  } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import api from '../../database/api'
+import api from '../../config/api'
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../store/user';
 
 const Login: React.FC = () => {
+    const dispatch = useDispatch();
+
     const [ opened, setOpen ] = useState(false) 
     const [ tabView, setTabView ] = useState(0)
     const [ showModal, setShowModal ] = useState(false)
@@ -17,28 +21,34 @@ const Login: React.FC = () => {
     const [ name, setName ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
+    const [ cpf, setCpf ] = useState('')
     
     async function  HandleLogin(event: FormEvent){
       event.preventDefault()
-      const data = await api.post('user/login', {email: email, password: password})
+      const data = await api.get('user/login', {auth:{username: email, password}})
       const message = data.data.message
+      const user = data.data.user
       
-      if(message === 'succeful' ){
-        ShowModal(1500, message)
-      }else{
+      if(message){
+        dispatch(userLogin(user))
+        localStorage.setItem('user', JSON.stringify(user))
         ShowModal(1500, message)
       }
       setOpen(false)
     }
     async function  HandleSignUp(event: FormEvent){
       event.preventDefault()
-      const data = await api.post('user/signup', {name: name, email: email, password: password})
-      
+      const data = await api.post('user/signup', {name, email, password, cpf})
+      const message = data.data.message
+      const user = data.data.user
+
       if(data.data !== '' ){
-        ShowModal(1500, data.data.message)
-        setTimeout(function() {
-          OpenFormLogin()
-        }, 2500);
+        dispatch(userLogin(user))
+        localStorage.setItem('user', JSON.stringify(user))
+        ShowModal(1500, message)
+        // setTimeout(function() {
+        //   OpenFormLogin()
+        // }, 2500);
       }else{
         ShowModal(1500, 'As informações estão incorretas')
       }
@@ -49,8 +59,8 @@ const Login: React.FC = () => {
       <>
         <Logo/> 
         <Heading>
-            Bem vindo
-            <p>Seja muito bem vindo</p>
+            Seja muito bem vindo ao Coffee Mountain!
+            <p>Venha tomar um café conosco!</p>
         </Heading>
         <Button onClick={OpenFormLogin}>Fazer Login</Button>
         <Button  onClick={OpenFormRegister}>Cadastrar-se</Button>
@@ -61,21 +71,22 @@ const Login: React.FC = () => {
         <Container className={opened && 'opened'}>
           <Tabs selectedIndex={tabView}  onSelect={index => setTabView(index)}>
             <TabList>
-              <Tab>Login</Tab>/
-              <Tab>Register</Tab>
+              <Tab>Entrar</Tab>/
+              <Tab>Registrar-se</Tab>
               <CloseForm onClick={() => setOpen(false)}><GrFormClose/> </CloseForm>
             </TabList>
 
             <TabPanel>
               <Input state={setEmail} placeholder="Email" />
-              <Input state={setPassword} placeholder="Senha" />
+              <Input state={setPassword} type="password" placeholder="Senha" />
 
               <ButtonForm onClick={HandleLogin}>Entrar</ButtonForm>
             </TabPanel>
             <TabPanel>
               <Input state={setName} placeholder="Nome" />
               <Input state={setEmail} placeholder="Email" />
-              <Input state={setPassword} placeholder="Senha" />
+              <Input state={setPassword} type="password" placeholder="Senha" />              
+              <Input state={setCpf} placeholder="CPF" />
 
               <ButtonForm onClick={HandleSignUp}>Registrar-se</ButtonForm>
             </TabPanel>

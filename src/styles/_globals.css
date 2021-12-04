@@ -25,6 +25,11 @@ html,body, #root{
   padding: 120px 1.5rem;
   position: relative;
 }
+.page--wrap {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 :root{
   --c0: #F8F8F8;

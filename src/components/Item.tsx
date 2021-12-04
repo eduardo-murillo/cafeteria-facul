@@ -2,18 +2,33 @@ import React from 'react';
 
 import { Container, LeftSide, RightSide, } from '../styles/Item';
 import { GrFormClose } from 'react-icons/gr'
+import { useDispatch, useSelector } from 'react-redux';
+import { basketProductsUpdate } from '../store/products';
 
-const Item: React.FC = () => {
+interface ItemInterface {
+  id: number,
+  name: string,
+  price: number
+}
+
+const Item: React.FC<ItemInterface> = ({id, name, price}) => {
+  const dispatch = useDispatch()
+  const {basketItems} = useSelector((state:any) => state.products)
+
+  function removeProduct(id:number) {
+    const filteredItems = basketItems.filter((item) =>{ return item.id !== id })
+    dispatch(basketProductsUpdate([...filteredItems]))
+  }
+
   return (
     <Container>
-      <span>
-        <GrFormClose/>
-      </span>
       <LeftSide>
-        <h1>Brigadeiro</h1>
-        <p>R$3.50</p>
+        <h1>{name}</h1>
+        <p>R${price.toFixed(2)}</p>
       </LeftSide>
-      <RightSide></RightSide>
+      <RightSide>
+          <GrFormClose onClick={() => removeProduct(id)}/>
+      </RightSide>
     </Container>
   );
 }

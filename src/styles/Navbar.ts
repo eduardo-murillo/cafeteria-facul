@@ -22,6 +22,7 @@ export const Topside = styled.div`
     > h1{
         font-family: 'Dancing Script', cursive;
         font-size: 1.5rem;
+        cursor: pointer;
     }
     > svg{
         width: 32px;
@@ -33,6 +34,7 @@ export const Bottomside = styled.div`
     align-items: center;
     position: relative;
     margin-top: 1rem;
+    cursor: pointer;
 
     > input{
         padding: 5px 10px;

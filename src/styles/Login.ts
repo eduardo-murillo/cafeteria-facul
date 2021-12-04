@@ -5,6 +5,7 @@ export const Logo = styled.div`
     height: 160px;
     background: var(--c300);
     border-radius: 100px;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/coffeemountain.appspot.com/o/logocoffee.png?alt=media&token=a8a0febc-46ff-4270-aa40-51c1159ab841");
 `
 export const Heading = styled.h1`
     margin-top: 2rem;
@@ -24,6 +25,7 @@ export const Button = styled.div`
     background: var(--c300);
     width: 15rem;
     height: 3rem;
+    cursor: pointer;
 
     margin-top: 1rem;
     border-radius: 99px;
@@ -92,6 +94,7 @@ export const CloseForm = styled.span`
   right: 10%;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 
   > svg{
     width: 25px;
@@ -107,6 +110,7 @@ export const ButtonForm = styled.button`
   padding: .5rem 3rem;
   border-radius: 999px;
   margin-top: 1rem;
+  cursor: pointer;
 
   background: var(--yellow);
   filter: brightness(95%);

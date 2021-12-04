@@ -1,39 +1,51 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link'
 
 import { Container, Item, ActiveBar } from '../styles/Bottomnav';
-import { BiShoppingBag, BiUserCircle, BiCookie } from 'react-icons/bi'
+import { BiShoppingBag, BiUserCircle, BiCoffee } from 'react-icons/bi'
+import { useSelector } from 'react-redux';
+interface BottomNavInterface {
+    active: string;
+    user: any;
+    // setActive: Dispatch<SetStateAction<string>>;
+}
 
-const Bottomnav: React.FC = () => {
-    const [ active, setActive ] = useState('home')
+const Bottomnav: React.FC<BottomNavInterface> = ({active, user}) => {
+    const {basketItems} = useSelector((state:any) => state.products)
 
     return (
         <Container>
             <Link href="/login">
                 <Item
-                    className={active === 'login' && 'active'}
-                    onClick={() => setActive('login')}>
+                    className={active === 'User' ? 'active' : undefined}
+                    >
                     <BiUserCircle/>
                 </Item>
             </Link>
             <Link href="/">
                 <Item
-                    className={active === 'home' && 'active'}
-                    onClick={() => setActive('home')}>
-                    <BiCookie/>
+                    className={active === 'Home' ? 'active' : undefined}
+                    style={{display:  user.id === 0 ? 'none' : 'flex' }}
+                    >
+                    <BiCoffee/>
                 </Item>
             </Link> 
             <Link href="/basket">
                 <Item
-                    className={active === 'basket' && 'active'}
-                    onClick={() => setActive('basket')}>
+                    className={active === 'Basket' ? 'active' : undefined}
+                    style={{display:  user.id === 0 ? 'none' : 'flex' }}
+                    >
                     <BiShoppingBag/>
+                    <span>
+                        {basketItems.length}
+                    </span>
                 </Item>
             </Link> 
             <ActiveBar className={
-                active === "login"? "left": "" + 
-                active === "home"? "middle": "" + 
-                active === "basket"? "right": ""
+                user.id === 0 ? "middle" : "" +
+                active === "User"? "left": "" + 
+                active === "Home"? "middle": "" + 
+                active === "Basket"? "right": ""
             }/>
         </Container>
     );

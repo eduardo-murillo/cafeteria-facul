@@ -1,45 +1,63 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { compare } from 'bcryptjs'
-import { sign } from 'jsonwebtoken'
+import * as jwt from '../../../../config/jwt'
+import { mysql, excuteQuery } from '../../../../config/db'
 
-import sqlite from 'sqlite'
 import cookie from 'cookie'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-    const { email } = request.body;
-    const { password } = request.body;
-    const db = await sqlite.open('./database/person.sqlite')
-
-    const { GUID_TOKEN } = process.env
-
-    if (request.method === 'POST') {
-        let sql = 'SELECT * FROM person WHERE email = ?'
-        const person = await db.get(sql, [email]);
+    if (request.method === 'GET') {
+        const [,hash] = request.headers.authorization.split(' ')
+        const [email, password] = Buffer.from(hash, 'base64').toString().split(':')
         
-        if(person === undefined){
-            response.json({message: 'wrong email'});
-        }else{
-            compare(password, person.password, function(errors, result) {
-                if(!errors && result){
-                    const claims = { id: person.id}
-                    const jwt = sign(claims, GUID_TOKEN, { expiresIn: '1hr' })
+        // console.log('hash', hash);
+        // console.log('email', email);
+        // console.log('password', password);
 
-                    response.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV !== 'development',
-                        sameSite: 'strict',
-                        maxAge: 3600,
-                        path: '/'
-                    }) )
-                    response.status(200).json({message: 'Welcome to the app!'});
-                }else{
-                    response.status(405).json({message: 'wrong password'});
-                }
-            });
+
+
+        // Para usos futuros
+        //  let results = await mysql.transaction()
+        //   .query('INSERT INTO table (x) VALUES(?)', [1])
+        //   .query((r) => ['UPDATE table SET x = 1 WHERE id = ?', r.insertId])
+        //   .rollback(e => { /* do something with the error */ }) // optional
+        //   .commit() // execute the queries
+        
+        if(!email){
+            return response.json({message: 'Informe um email!'});
+        }
+
+        if(!password){
+            return response.json({message: 'Informe uma senha!'});
+        }
+
+        try {
+            await mysql.connect()
+            let query = 'SELECT * FROM usuario WHERE EmailUsuario = ?'
+            const [person] = (await excuteQuery({query, values: [email]}));
+            await mysql.end() 
+            
+            if(person === undefined){
+                return response.json({message: 'Usuário ou senha incorretas.'});
+            }else{
+                compare(password, person.SenhaUsuario, async function(errors, result) {
+                    if(!errors && result){
+                        const userToken = jwt.sign({user: person.id})
+                        
+                        return response.status(200).json({message: 'Seja bem vindo ao Coffee Mountain :)', user: {id: userToken, name: person.NomeUsuario}});
+                    }else{
+                        await mysql.end()
+                        return response.status(405).json({message: 'Usuário ou senha incorretas.'});
+                    }
+                });
+            }
+        } catch (e) {
+            await mysql.end()
+            return response.status(405).json({message: 'Ops, algo deu errado!'});
         }
     } else {
-        response.status(405).json({ message: 'We only support POST' })
+        return response.status(405).json({ message: 'Só suportamos GET' })
     }
-    db.close()
+    await mysql.end()
 }

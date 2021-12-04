@@ -13,7 +13,11 @@ export  const LeftSide = styled.div`
 
     width: 65px;
     height: 65px;
-    background:  var(--c300);
+
+    > svg {
+        width: 100%;
+        height: 100%;
+    }
 `;
 export  const RightSide = styled.div`
     display: flex;
@@ -54,6 +58,7 @@ export const Button = styled.button`
     font-size: 1rem;
     padding: 1rem 2rem;
     border-radius: 99px;
+    cursor: pointer;
 
     margin-top: 2rem;
     background: var(--c200);

@@ -1,25 +1,35 @@
 import React from 'react';
 
 import { Container, Image, Content,  Price}  from '../styles/Product';
-
-const Product: React.FC = () => {
+interface ProductInterface {
+    src: string;
+    alt?: string;
+    name: string,
+    desc: string,
+    price: Number
+    addProduct: any;
+    item: object;
+}
+const Product: React.FC<ProductInterface> = ({src, alt, name, desc, price, addProduct, item}) => {
   return (
       <Container>
           <Image>
-
+            <img src={src} alt={alt} />
           </Image>
           <Content>
               <div>
-                <p>
-                    <h1>Brigadeiro</h1>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro aut ab .
-                </p>
-                <Price>
-                    <h1>00,0</h1>
-                    <h2>R$</h2>
-                </Price>
+                <h1>{name}</h1>
+                <span>
+                    <p>
+                        {desc}
+                    </p>
+                    <Price>
+                        <h2>R$</h2>
+                        <h1>{price.toFixed(2)}</h1>
+                    </Price>
+                </span>
               </div>
-              <button>
+              <button onClick={() => addProduct(item)}>
                   Adicionar
               </button>
           </Content>
