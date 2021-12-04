@@ -22,15 +22,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
         if(!cpf){
             return response.json({message: 'Informe um cpf!'});
-        }    
-
-            const searchCpf = 'Select CPF from usuario where CPF = ?';
-            const [cpf1] = await excuteQuery({query: searchCpf, values: [cpf]})                             
-            const cpffinal = cpf1.CPF;            
-            
-            if(cpffinal === cpf){
-                return response.json({message: 'CPF já cadastrado!'});            
-            }
+        }                
         
         try {
             await mysql.connect()            
