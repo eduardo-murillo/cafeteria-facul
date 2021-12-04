@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/router'
 
 import { Container, Topside, Bottomside } from '../styles/Navbar';
-import { BiCookie } from 'react-icons/bi'
+import { BiCoffee } from 'react-icons/bi'
 import { IoMdSearch } from 'react-icons/io'
 
 interface NavbarInterface {
@@ -17,7 +17,7 @@ const Navbar: React.FC<NavbarInterface> = ({setActive}) => {
     <Container>
         <Topside>
             <h1 onClick={() => {setActive('Home'); router.push('/')}}>Coffee Mountain</h1>
-            <BiCookie/>
+            <BiCoffee/>
         </Topside>
         {
           router.asPath === '/' && (

@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link'
 
 import { Container, Item, ActiveBar } from '../styles/Bottomnav';
-import { BiShoppingBag, BiUserCircle, BiCookie } from 'react-icons/bi'
+import { BiShoppingBag, BiUserCircle, BiCoffee } from 'react-icons/bi'
 interface BottomNavInterface {
     active: string;
     setActive: Dispatch<SetStateAction<string>>;
@@ -23,7 +23,7 @@ const Bottomnav: React.FC<BottomNavInterface> = ({active, setActive}) => {
                 <Item
                     className={active === 'Home' && 'active'}
                     onClick={() => setActive('Home')}>
-                    <BiCookie/>
+                    <BiCoffee/>
                 </Item>
             </Link> 
             <Link href="/basket">
