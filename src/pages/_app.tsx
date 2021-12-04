@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../../config/api';
 import Bottomnav from '../components/Bottomnav'
 import Navbar from '../components/Navbar'
@@ -13,16 +13,16 @@ import '../styles/_globals.css'
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
   const [active, setActive] = useState(Component.name)
+  const user = useSelector((state:any) => state.user)
   let userAuth;
 
   if (typeof window !== "undefined") {
-    userAuth = localStorage.getItem('user')
+    userAuth = JSON.parse(localStorage.getItem('user'))
   }
 
   async function getAllProducts() { 
     const data = await api.get('products/all')
     const productsList = data.data.products
-    console.log('lista', productsList);
     
     dispatch(productsUpdate(productsList))
   }
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
       <>
       <Navbar />
           <Component {...pageProps} />
-      <Bottomnav active={active} />
+      <Bottomnav active={active} user={user} />
       </>
     // </LoginProvider>
   )

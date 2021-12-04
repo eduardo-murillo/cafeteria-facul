@@ -30,7 +30,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             const hashedPassword = await hash(password, 10)
             
             const insertedUser = await excuteQuery({query: signup, values: [name, email, hashedPassword, cpf]})   
-            const searchUser = 'Select * from usuario where idUsuario = ?';
+            
+            const searchUser = 'Select * from usuario where IdUsuario = ?';
             const [user] = await excuteQuery({query: searchUser, values: [insertedUser.insertId]})   
             
             await mysql.end()
@@ -39,7 +40,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
                 throw new Error
             }
 
-            const userToken = jwt.sign({user: user.idUsuario})
+            const userToken = jwt.sign({user: user.IdUsuario})
 
             return response.status(200).json({message: "Seja bem vindo ao Coffee Mountain :)", user: {id: userToken, name: user.NomeUsuario}})
         } catch (e) {

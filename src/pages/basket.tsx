@@ -17,13 +17,22 @@ import Input from '../components/Endereco';
 export default function Basket(): JSX.Element {
   const dispatch = useDispatch()
   const {basketItems, fretes} = useSelector((state:any) => state.products)
+  const user = useSelector((state:any)=> state.user)
+
   
   const [valorTaxa, setValorTaxa] = useState(15)
+  const [totalPrice, setTotalPrice] = useState()
 
   async function getFretes() {
     const {fretes} = (await api.get('basket/fretes')).data
     dispatch(fretesUpdate(fretes))
-    console.log('fretes', fretes);
+    }
+
+  async function handleSendOrder() {
+    // fazer verificação se existe algum produto na basket
+    const idProdutos = (basketItems.map((item) => {return item.id})).toString()
+    
+    const data = await api.post('orders/postOrder', {idUsuario_FK: user.id, PrecoTotal: totalPrice, Produtos: idProdutos })
   }
 
   const [ rua, setRua ] = useState('')
@@ -31,6 +40,9 @@ export default function Basket(): JSX.Element {
   const [ bairro, setBairro ] = useState('')
 
   useEffect(() => {
+    if(user.id === 0) {
+      router.push('/login')
+    }
     if(fretes.length === 0 ) {
       getFretes()
     }
@@ -60,17 +72,17 @@ export default function Basket(): JSX.Element {
 
         <Items>
         <h3>Revise seu pedido:</h3>
-        {basketItems.map(({id, name, price}) => {
-          return <Item id={id} name={name} price={price}/>
+        {basketItems.map(({id, name, price}, i) => {
+          return <Item key={i} id={id} name={name} price={price}/>
         })}
 
           <Button onClick={() => {router.push('/')}} style={{cursor: 'pointer'}}>Adicionar mais  Itens</Button>
         </Items>
 
-        <TotalPrice produtos={basketItems} frete={valorTaxa}/>
+        <TotalPrice produtos={basketItems} frete={valorTaxa} setTotalPrice={setTotalPrice} totalPrice={totalPrice}/>
         <PaymentMethod/>
 
-        <Button className="FinalButton">
+        <Button className="FinalButton" onClick={handleSendOrder}>
           Finalizar Pedido
         </Button>
       </div> 
