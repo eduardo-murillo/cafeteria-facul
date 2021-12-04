@@ -23,7 +23,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         
         try {
             const userToken = jwt.verify(idUsuario_FK)
-            
+
             await mysql.connect()
             const order = 'INSERT INTO venda (idUsuario_FK, PrecoTotal, Produtos) values (?,?,?)';
             
@@ -33,7 +33,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             if(insertedOrder.error) {
                 throw new Error
             }
-
+            
             return response.status(200).json({message: "Pedido feito. Obrigado por comprar conosco!", order: {id: insertedOrder.insertId}})
         } catch (e) {
             await mysql.end()

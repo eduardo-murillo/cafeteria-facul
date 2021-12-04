@@ -16,13 +16,13 @@ const TotalPrice: React.FC<TotalPriceInterface> = ({produtos, frete, setTotalPri
 
   const subTotal = prices.length > 0 && prices.reduce((previousValue, currentValue) => previousValue + currentValue)
 
-  setTotalPrice((subTotal + frete).toFixed(2))
+  setTotalPrice((subTotal + Number(frete)))
 
   return (
       <Container>
-          <p>Subtotal <span>R${(subTotal || 0).toFixed(2)}</span></p>
-          <p>Taxa de entrega <span>R${(frete || 0).toFixed(2)}</span></p>
-          <h1>Total <span>R${totalPrice}</span></h1>
+          <p>Subtotal <span>R${(Number(subTotal) || 0).toFixed(2)}</span></p>
+          <p>Taxa de entrega <span>R${(Number(frete) || 0).toFixed(2)}</span></p>
+          <h1>Total <span>R${Number(totalPrice).toFixed(2)}</span></h1>
       </Container>
   );
 }

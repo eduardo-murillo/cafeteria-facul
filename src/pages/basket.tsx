@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import { RiArrowRightSLine } from 'react-icons/ri'
-import { DeliveryPlace, LeftSide, RightSide, Items, Button }  from '../styles/Basket';
+import { DeliveryPlace, LeftSide, RightSide, Items, Button, Select }  from '../styles/Basket';
 import Item from '../components/Item';
 import TotalPrice from '../components/TotalPrice';
 import PaymentMethod from '../components/PaymentMethod';
@@ -48,6 +48,12 @@ export default function Basket(): JSX.Element {
     }
   }, [])
 
+  useEffect(() => {
+      console.log('fretes', fretes);
+      console.log('taxa', valorTaxa);
+      
+  }, [valorTaxa])
+
   return (
     <>
       <Head>
@@ -63,10 +69,19 @@ export default function Basket(): JSX.Element {
             <img src="https://firebasestorage.googleapis.com/v0/b/coffeemountain.appspot.com/o/deliveryico.png?alt=media&token=967536a0-d04e-4d1e-8f55-07712a99fdba"/>
           </LeftSide>
           <RightSide>
-            <h1>Endereço de Entrega:</h1>               
+            <h1>Endereço de Entrega:</h1>         
+            <div>
               <Input state={setRua} placeholder="Rua" />
               <Input state={setNumero} type="number" placeholder="Nº" />
-              <Input state={setBairro} placeholder="Bairro" />                        
+              <Input state={setBairro} placeholder="Bairro" />
+              <Select name="cidade" onChange={(e:any) => setValorTaxa(e.target.value)}>
+                <option value="" disabled>Escolha sua cidade</option>  
+                {fretes.map((cidade) => {
+                  return <option key={cidade.IdTaxaEntrega} value={cidade.ValorTaxa}>{cidade.Cidade}</option>  
+                })}
+              </Select>                        
+
+            </div>      
           </RightSide>
         </DeliveryPlace>
 

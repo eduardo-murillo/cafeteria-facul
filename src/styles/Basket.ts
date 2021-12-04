@@ -14,6 +14,10 @@ export  const LeftSide = styled.div`
     width: 65px;
     height: 65px;
 
+    @media (max-width: 1100px) {
+        display: none
+    }
+
     > svg {
         width: 100%;
         height: 100%;
@@ -29,6 +33,20 @@ export  const RightSide = styled.div`
     padding-left: 20px;
     flex: 1;
 
+    @media (max-width: 1100px) {
+        align-items: center;
+        padding: 0;
+        > div {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 450px) {
+        margin: 0 auto;
+        width: max-content;
+        padding: 0;
+    }
+
     >  h1{
         font-size: 1rem;
     }
@@ -38,6 +56,12 @@ export  const RightSide = styled.div`
 
         width: 32px;
         height: 32px;
+    }
+    > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width:100%
     }
 `;
 
@@ -116,5 +140,20 @@ export const Container = styled.div`
         justify-content: flex-start;
 
         background: var(--c100);
+    }
+`;
+
+export const Select = styled.select`
+    border: solid 1.5px var(--c400);
+    border-radius: 999px ;
+    padding: 8px 15px;
+    outline: 0;
+    
+    height: 44px;
+    width: 312px;   
+    background: transparent;
+    &:focus{
+        border: solid 1.5px var(--yellow) ;
+        font-size: 14px;
     }
 `;
