@@ -45,6 +45,6 @@ export const Container = styled.div`
         align-items: center;
         justify-content: flex-start;
 
-        background: var(--c100);
+        background: transparent;
     }
 `;
