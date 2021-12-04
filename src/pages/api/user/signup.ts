@@ -25,10 +25,10 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         }    
 
             const searchCpf = 'Select CPF from usuario where CPF = ?';
-            const [cpf1] = await excuteQuery({query: searchCpf, values: [cpf]})                             
-            const cpffinal = cpf1.CPF;            
+            const [cpfQuery] = await excuteQuery({query: searchCpf, values: [cpf]})                             
+            const confirmCPF = cpfQuery;
             
-            if(cpffinal === cpf){
+            if(confirmCPF){
                 return response.json({message: 'CPF já cadastrado!'});            
             }
         
