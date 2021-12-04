@@ -6,13 +6,15 @@ import Item from '../components/Item';
 import TotalPrice from '../components/TotalPrice';
 import PaymentMethod from '../components/PaymentMethod';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fretesUpdate } from '../store/products';
 import api from '../../config/api';
 import router from 'next/router';
 import { GrFormLocation } from 'react-icons/gr';
+import { TabPanel } from 'react-tabs';
+import Input from '../components/Endereco';
 
-export default function Basket() {
+export default function Basket(): JSX.Element {
   const dispatch = useDispatch()
   const {basketItems, fretes} = useSelector((state:any) => state.products)
   
@@ -23,6 +25,10 @@ export default function Basket() {
     dispatch(fretesUpdate(fretes))
     console.log('fretes', fretes);
   }
+
+  const [ rua, setRua ] = useState('')
+  const [ numero, setNumero ] = useState('')
+  const [ bairro, setBairro ] = useState('')
 
   useEffect(() => {
     if(fretes.length === 0 ) {
@@ -45,10 +51,10 @@ export default function Basket() {
             <img src="https://firebasestorage.googleapis.com/v0/b/coffeemountain.appspot.com/o/deliveryico.png?alt=media&token=967536a0-d04e-4d1e-8f55-07712a99fdba"/>
           </LeftSide>
           <RightSide>
-            <h1>Endereço de Entrega:</h1>
-            <p>Rua: </p>            
-            <input placeholder="Insira aqui o endereço para entrega.." type="text" style={{width: "250px", height: "30px"}}/>                            
-            {/* <RiArrowRightSLine/> */}
+            <h1>Endereço de Entrega:</h1>               
+              <Input state={setRua} placeholder="Rua" />
+              <Input state={setNumero} type="number" placeholder="Nº" />
+              <Input state={setBairro} placeholder="Bairro" />                        
           </RightSide>
         </DeliveryPlace>
 
