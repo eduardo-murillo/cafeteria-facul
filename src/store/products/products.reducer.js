@@ -8,10 +8,7 @@ import {
 
 const INITIAL_STATE = {
   items: [],
-  basketItems: [
-    {id: 1, name: "Brigadeiro", price: 2.0},
-    {id: 2, name: "Pão de queijo", price: 3.99},
-  ],
+  basketItems: [],
   fretes: [],
 };
 

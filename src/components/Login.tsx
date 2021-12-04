@@ -31,7 +31,7 @@ const Login: React.FC = () => {
       
       if(message){
         dispatch(userLogin(user))
-        localStorage.setItem('user', user)
+        localStorage.setItem('user', JSON.stringify(user))
         ShowModal(1500, message)
       }
       setOpen(false)
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
 
       if(data.data !== '' ){
         dispatch(userLogin(user))
-        localStorage.setItem('user', user)
+        localStorage.setItem('user', JSON.stringify(user))
         ShowModal(1500, message)
         // setTimeout(function() {
         //   OpenFormLogin()

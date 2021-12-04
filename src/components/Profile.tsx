@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
 
     async function logout(){
       dispatch(userLogout())
-      localStorage.setItem('user', '')
+      localStorage.removeItem('user')
     }
     // const [ opened, setOpen ] = useState(false) 
     // const [ tabView, setTabView ] = useState(0)

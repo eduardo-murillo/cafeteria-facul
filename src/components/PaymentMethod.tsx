@@ -59,7 +59,7 @@ const PaymentMethod = () => {
                     {props.icon}
                 </LeftSide>
                 <RightSide>
-                    <h1 className={props.children === active.type && 'active'}>{props.children}</h1>
+                    <h1 className={props.children === active.type ? 'active' : undefined}>{props.children}</h1>
                 </RightSide>
             </OptionContainer>
         )

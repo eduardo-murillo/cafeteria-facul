@@ -16,9 +16,7 @@ const Item: React.FC<ItemInterface> = ({id, name, price}) => {
   const {basketItems} = useSelector((state:any) => state.products)
 
   function removeProduct(id:number) {
-    console.log('itens não filtrados', basketItems);
     const filteredItems = basketItems.filter((item) =>{ return item.id !== id })
-    console.log('itens filtrados', filteredItems);
     dispatch(basketProductsUpdate([...filteredItems]))
   }
 
